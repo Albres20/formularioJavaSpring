@@ -39,19 +39,20 @@ public class formController {
         return "resultado";
     }*/
     @PostMapping("/form")
-    public String procesar(Model model,
-                           @Valid usuario user, BindingResult result){
+    public String procesar(Model model, @Valid usuario user, BindingResult result){
         if(result.hasErrors()){
             Map<String, String> errores= new HashMap<>();
             result.getFieldErrors().forEach(err -> {
                 errores.put(err.getField(), "El campo " + err.getField() + " " + err.getDefaultMessage());
             });
-        model.addAttribute("errorPasante", errores);
+
+            //Asume la ,muestra a travs de model
+            model.addAttribute("errorPasante", errores);
             return "form";
         }
 
         model.addAttribute("titulo", "Resultado Formulario");
-            model.addAttribute("user", user);
+        model.addAttribute("user", user);
 
         return "resultado";
     }
